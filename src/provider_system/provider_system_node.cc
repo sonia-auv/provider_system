@@ -62,9 +62,26 @@ namespace provider_system {
 
     void ProviderSystemNode::checkTemp() {
 
+        std::string cmdResult = executeCmd(cpuTempCmd);
+        double cpuTemp = std::stod(cmdResult);
 
+        ROS_DEBUG("CPU Temp : %f C", cpuTemp);
 
     }
 
+    std::string ProviderSystemNode::executeCmd(const std::string cmd)
+    {
+
+        std::array<char, 128> buffer;
+        std::string result;
+        std::shared_ptr<FILE> pipe(popen(cmd.data(), "r"), pclose);
+        if (!pipe) throw std::runtime_error("error while executing command");
+        while (!feof(pipe.get())) {
+            if (fgets(buffer.data(), 128, pipe.get()) != NULL)
+                result += buffer.data();
+        }
+        return result;
+
+    }
 
 }  // namespace provider_system

@@ -28,6 +28,13 @@
 
 #include <ros/node_handle.h>
 
+#include <cstdio>
+#include <iostream>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <array>
+
 namespace provider_system {
 
 class ProviderSystemNode {
@@ -53,6 +60,10 @@ private:
 
     void checkTemp();
 
+    std::string executeCmd(const std::string cmd);
+
+
+    const std::string cpuTempCmd = "sensors | grep -A 0 'temp1' | awk '{print $2}' | sed 's/^+\\(.*\\)°C$/\\1/'";
 
 };
 
