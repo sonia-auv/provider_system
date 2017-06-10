@@ -49,13 +49,22 @@ namespace provider_system {
     //
     void ProviderSystemNode::Spin() {
 
-      ros::Rate r(15);  // 15 hz
+      ros::Rate r(0.5);  // 15 hz
       while (ros::ok()) {
         ros::spinOnce();
-        r.sleep();
+
+          checkTemp();
+
+       r.sleep();
       }
     }
 
+
+    void ProviderSystemNode::checkTemp() {
+
+
+
+    }
 
 
 }  // namespace provider_system

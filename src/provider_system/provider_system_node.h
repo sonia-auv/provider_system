@@ -51,6 +51,8 @@ private:
 
     ros::NodeHandlePtr nh_;
 
+    void checkTemp();
+
 
 };
 
