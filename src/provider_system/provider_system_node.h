@@ -28,6 +28,8 @@
 
 #include <ros/node_handle.h>
 
+#include "provider_system/SystemTemperature.h"
+
 #include <cstdio>
 #include <iostream>
 #include <memory>
@@ -61,8 +63,7 @@ private:
     void checkTemp();
 
     std::string executeCmd(const std::string cmd);
-
-
+    
     const std::string cpuTempCmd = "sensors | grep -A 0 'temp1' | awk '{print $2}' | sed 's/^+\\(.*\\)°C$/\\1/'";
 
 };

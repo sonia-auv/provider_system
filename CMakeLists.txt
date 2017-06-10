@@ -40,11 +40,14 @@ find_package(
 #===============================================================================
 # G E N E R A T E   M E S S A G E S   &   S E R V I C E S
 
-#add_message_files(DIRECTORY msg
-#        FILES
-#        )
+add_message_files(DIRECTORY msg
+        FILES
+        SystemTemperature.msg
+        )
 
 #add_service_files(DIRECTORY srv FILES )
+
+generate_messages()
 
 catkin_package(
         CATKIN_DEPENDS
