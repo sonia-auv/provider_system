@@ -36,6 +36,7 @@ namespace provider_system {
         : nh_(nh)
     {
 
+        system_temperature_pub_ = nh_->advertise<provider_system::SystemTemperature>("/provider_system/system_temperature", 100);
 
     }
 
@@ -63,9 +64,16 @@ namespace provider_system {
     void ProviderSystemNode::checkTemp() {
 
         std::string cmdResult = executeCmd(cpuTempCmd);
-        double cpuTemp = std::stod(cmdResult);
+        float cpuTemp = std::stof(cmdResult);
 
         ROS_DEBUG("CPU Temp : %f C", cpuTemp);
+
+        SystemTemperature systemTemperature;
+
+        systemTemperature.cpuTemp = cpuTemp;
+
+        system_temperature_pub_.publish(systemTemperature);
+
 
     }
 

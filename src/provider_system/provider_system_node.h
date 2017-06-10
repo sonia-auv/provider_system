@@ -63,8 +63,10 @@ private:
     void checkTemp();
 
     std::string executeCmd(const std::string cmd);
-    
+
     const std::string cpuTempCmd = "sensors | grep -A 0 'temp1' | awk '{print $2}' | sed 's/^+\\(.*\\)°C$/\\1/'";
+
+    ros::Publisher system_temperature_pub_;
 
 };
 
