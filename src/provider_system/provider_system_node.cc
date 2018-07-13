@@ -36,7 +36,7 @@ namespace provider_system {
         : nh_(nh)
     {
 
-        system_temperature_pub_ = nh_->advertise<provider_system::SystemTemperature>("/provider_system/system_temperature", 100);
+        system_temperature_pub_ = nh_->advertise<std_msgs::Float32>("/provider_system/system_temperature", 100);
 
     }
 
@@ -68,9 +68,9 @@ namespace provider_system {
 
         ROS_DEBUG("CPU Temp : %f C", cpuTemp);
 
-        SystemTemperature systemTemperature;
+        std_msgs::Float32 systemTemperature;
 
-        systemTemperature.cpuTemp = cpuTemp;
+        systemTemperature.data = cpuTemp;
 
         system_temperature_pub_.publish(systemTemperature);
 

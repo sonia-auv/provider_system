@@ -28,7 +28,7 @@
 
 #include <ros/node_handle.h>
 
-#include "provider_system/SystemTemperature.h"
+#include <std_msgs/Float32.h>
 
 #include <cstdio>
 #include <iostream>
