@@ -13,6 +13,10 @@ jobs:
       GITHUB_REMOTE_URL: docker.pkg.github.com/${{ github.repository }}
     steps:
       - uses: actions/checkout@v2
+      - name: Login to Github Package Registry
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+          
       - name: Build the Docker image
         run: |
           docker build . --tag build-${GITHUB_REF##*/}-${GITHUB_RUN_NUMBER} --build-arg BUILD_DATE=$(date '+%Y-%m-%d_%H:%M:%S') --build-arg VERSION=${GITHUB_REF##*/}-$(date '  +%Y-%m-%d_%H:%M:%S')
@@ -22,10 +26,6 @@ jobs:
           docker images
           docker run build-${GITHUB_REF##*/}-${GITHUB_RUN_NUMBER} catkin_make run_tests
           docker run build-${GITHUB_REF##*/}-${GITHUB_RUN_NUMBER} catkin_make tests
-
-      - name: Login to Github Package Registry
-        run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       - name: Create Git Tag
         run: |
