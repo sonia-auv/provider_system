@@ -38,8 +38,8 @@ RUN bash -c "source ${ROS_WS_SETUP}; catkin_make"
 RUN chown -R ${SONIA_USER}: ${SONIA_WS}
 USER ${SONIA_USER}
 
-RUN echo "$ENTRYPOINT_ABSPATH" > ./entrypoint.sh
-RUN echo "roslaunch $LAUNCH_ABSPATH" > ./launch.sh
+RUN echo "$ENTRYPOINT_ABSPATH" > ./entrypoint.sh && chmod +x ./entrypoint.sh
+RUN echo "roslaunch $LAUNCH_ABSPATH" > ./launch.sh && chmod +x ./launch.sh
 
 ENTRYPOINT ["/bin/bash", "./entrypoint.sh"]
 CMD ["bin/bash", "./launch.sh"]
