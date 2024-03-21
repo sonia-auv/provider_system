@@ -25,7 +25,7 @@ ENV LAUNCH_ABSPATH=${NODE_PATH}/launch/${LAUNCH_FILE}
 ENV ENTRYPOINT_ABSPATH=${NODE_PATH}/scripts/${ENTRYPOINT_FILE}
 
 ENV SONIA_WS_SETUP=${SONIA_WS}/devel/setup.bash
-RUN apt update && apt install -y lm-sensors
+RUN apt update
 
 WORKDIR ${SONIA_WS}
 

@@ -64,7 +64,7 @@ private:
 
     std::string executeCmd(const std::string cmd);
 
-    const std::string cpuTempCmd = "sensors | grep -A 0 'temp1' | awk '{print $2}' | sed 's/^+\\(.*\\)°C$/\\1/'";
+    const std::string cpuTempCmd = "echo \"scale=1;`cat /sys/class/thermal/thermal_zone0/temp`/1000\" | bc";
 
     ros::Publisher system_temperature_pub_;
 
